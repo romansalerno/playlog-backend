@@ -19,7 +19,10 @@ app.get('/', (req, res) => {
 
 // Rutas
 const authRoutes = require('./src/routes/auth.routes');
+const showsRoutes = require('./src/routes/shows.routes');
+
 app.use('/api/auth', authRoutes);
+app.use('/api/shows', showsRoutes);
 
 // Iniciar servidor
 app.listen(PORT, '0.0.0.0', () => {
