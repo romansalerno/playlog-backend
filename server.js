@@ -17,10 +17,11 @@ app.get('/', (req, res) => {
   });
 });
 
-// Rutas (las agregaremos después)
-// app.use('/api/auth', require('./src/routes/auth'));
+// Rutas
+const authRoutes = require('./src/routes/auth.routes');
+app.use('/api/auth', authRoutes);
 
 // Iniciar servidor
-app.listen(PORT, () => {
-  console.log(`🎭 Servidor corriendo en http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🎭 Servidor corriendo en http://localhost:${PORT}`);
 });
