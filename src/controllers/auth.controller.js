@@ -139,11 +139,11 @@ const login = async (req, res) => {
 // OBTENER PERFIL (requiere autenticación)
 const getProfile = async (req, res) => {
   try {
-    // req.userId viene del middleware de autenticación
+    const userId = req.userId;
+
     const result = await query(
-      `SELECT id, username, email, avatar_url, bio, location, created_at 
-       FROM users WHERE id = $1`,
-      [req.userId]
+      'SELECT id, username, email, avatar_url, bio, location, role, created_at FROM users WHERE id = $1',
+      [userId]
     );
 
     if (result.rows.length === 0) {
@@ -151,7 +151,6 @@ const getProfile = async (req, res) => {
     }
 
     res.json({ user: result.rows[0] });
-
   } catch (error) {
     console.error('Error al obtener perfil:', error);
     res.status(500).json({ error: 'Error al obtener perfil' });
